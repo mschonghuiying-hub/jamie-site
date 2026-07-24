@@ -1,0 +1,10 @@
+# Internal docs — not for the public site repo
+HANDOFF-TO-CLAUDE-CODE.md
+WEBSITE-CONTENT.md
+WEBSITE-PLAN.md
+jamie-site-mockup.html
+Jamie_Chong_resume.pdf
+.Rhistory
+.DS_Store
+node_modules/
+.vercel

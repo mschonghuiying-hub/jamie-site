@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jamie Chong, Strategy × Data</title>
+<meta name="description" content="I turn complex data into decisions that move money, strategy, and teams. ~4 years across APAC fintech, OTT media and SaaS, now adding a Master of Data Science in Melbourne.">
+<link rel="canonical" href="https://jamie-site.vercel.app/">
+<!-- Favicon: JC monogram -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23141517'/%3E%3Ctext x='50' y='54' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='central'%3EJC%3C/text%3E%3C/svg%3E">
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jamie Chong">
+<meta property="og:title" content="Jamie Chong, Strategy × Data">
+<meta property="og:description" content="I turn complex data into decisions that move money, strategy, and teams. ~4 years across APAC fintech, OTT media and SaaS, now adding a Master of Data Science in Melbourne.">
+<meta property="og:url" content="https://jamie-site.vercel.app/">
+<meta property="og:image" content="https://jamie-site.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jamie Chong, Strategy × Data">
+<meta name="twitter:description" content="I turn complex data into decisions that move money, strategy, and teams. ~4 years across APAC fintech, OTT media and SaaS.">
+<meta name="twitter:image" content="https://jamie-site.vercel.app/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f6f3; --ink:#141517; --ink2:#33353a; --slate:#5f6169; --slate2:#95969d;
+    --card:#ffffff; --line:#e7e5df; --line2:#d8d5cd;
+    --accent:#2e5bff; --accent-soft:#e9eeff;
+    --warm:#e8613c; --warm-soft:#fbeae3;
+    --lime:#0a9e6e; --radius:10px; --maxw:1080px;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    --serif:"Fraunces",Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,-apple-system,system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px}
+  .mono{font-family:var(--mono)}
+  .micro{font-family:var(--mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--slate2); font-weight:500}
+
+  nav{position:sticky; top:0; z-index:30; background:rgba(247,246,243,.86); backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+  .navin{max-width:var(--maxw); margin:0 auto; padding:15px 32px; display:flex; align-items:center; justify-content:space-between}
+  .brand{font-family:var(--serif); font-weight:600; font-size:19px; letter-spacing:-.3px}
+  .navlinks{display:flex; gap:26px; font-size:14px}
+  .navlinks a{color:var(--slate); text-decoration:none; transition:color .15s}
+  .navlinks a:hover{color:var(--ink)}
+  .navcta{font-size:13px; font-weight:500; padding:9px 17px; background:var(--ink); color:#fff; border-radius:8px; text-decoration:none}
+  .navcta:hover{background:var(--warm)}
+  @media(max-width:820px){.navlinks{display:none}}
+
+  .hero{padding:70px 0 44px}
+  .hero .micro{color:var(--warm); margin-bottom:22px}
+  .hero h1{font-family:var(--serif); font-size:clamp(40px,6.6vw,72px); line-height:1.02; font-weight:500; letter-spacing:-1.5px; max-width:16ch}
+  .hero h1 .hl{color:var(--accent); font-style:italic}
+  .hero .lede{font-size:clamp(16px,1.9vw,19px); color:var(--ink2); max-width:62ch; margin-top:26px; line-height:1.6}
+  .hero .lede b{font-weight:600; color:var(--ink)}
+  .herocta{margin-top:30px; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  .btn{font-size:14px; font-weight:500; padding:12px 22px; border-radius:9px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line2); background:var(--card); cursor:pointer; transition:all .15s; font-family:inherit}
+  .btn.solid{background:var(--ink); color:#fff; border-color:var(--ink)}
+  .btn.solid:hover{background:var(--accent); border-color:var(--accent)}
+  .btn.ghost:hover{border-color:var(--ink)}
+  .facts{display:flex; align-items:center; flex-wrap:wrap; margin-top:28px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:4px 6px}
+  .fact{display:flex; align-items:center; gap:9px; padding:11px 18px; font-size:13.5px}
+  .fact + .fact{border-left:1px solid var(--line)}
+  .fact .fl{color:var(--slate2); font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.5px}
+  .fact .fv{color:var(--ink); font-weight:500}
+  .fact .flag{font-family:var(--mono); font-size:10px; background:rgba(10,158,110,.12); color:var(--lime); padding:2px 7px; border-radius:5px; letter-spacing:.5px}
+  @media(max-width:820px){.fact + .fact{border-left:none}}
+
+  .sec{padding:60px 0 4px}
+  .sectitle{font-family:var(--serif); font-size:clamp(24px,3.2vw,34px); font-weight:500; letter-spacing:-.6px; margin-top:10px}
+  .secsub{color:var(--slate); font-size:15.5px; margin:10px 0 30px; max-width:62ch}
+  .divider{border:none; border-top:1px solid var(--line); margin:0}
+  .shead{display:flex; align-items:center; gap:12px; margin-bottom:14px}
+  .snum{font-family:var(--mono); font-size:13px; font-weight:600; color:#fff; background:var(--warm); width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0}
+  .slabel{font-family:var(--mono); font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--slate); font-weight:500}
+
+  /* about */
+  .about{display:grid; grid-template-columns:280px 1fr; gap:40px; align-items:start}
+  @media(max-width:760px){.about{grid-template-columns:1fr; gap:26px}}
+  .photo{aspect-ratio:4/5; background:linear-gradient(150deg,var(--warm-soft),var(--accent-soft)); border-radius:16px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden}
+  .photo .ph{font-family:var(--mono); font-size:12px; color:var(--slate2); text-align:center; line-height:1.7}
+  .photo .mono-badge{position:absolute; bottom:14px; left:14px; right:14px; background:rgba(20,21,23,.82); color:#fff; border-radius:10px; padding:10px 13px; font-size:12px; backdrop-filter:blur(4px)}
+  .photo .mono-badge b{font-weight:600}
+  .abouttext .lead{font-family:var(--serif); font-size:22px; line-height:1.4; font-weight:400; letter-spacing:-.3px; color:var(--ink)}
+  .abouttext p{font-size:15px; color:var(--ink2); margin-top:16px; line-height:1.65}
+  .langs{margin-top:24px}
+  .langs .lt{font-family:var(--mono); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--slate2); margin-bottom:10px}
+  .langrow{display:flex; gap:8px; flex-wrap:wrap}
+  .lang{background:var(--card); border:1px solid var(--line); border-radius:999px; padding:7px 14px; font-size:13px; display:flex; align-items:center; gap:7px}
+  .lang b{font-weight:500}
+  .lang .pct{font-family:var(--mono); font-size:10.5px; color:var(--warm)}
+  .tags{margin-top:22px; display:flex; flex-direction:column; gap:9px}
+  .tagi{font-size:13.5px; color:var(--slate); padding-left:16px; position:relative}
+  .tagi::before{content:""; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:2px; background:var(--warm)}
+  .tagi b{color:var(--ink); font-weight:600}
+
+  /* voyage */
+  .voyage svg{width:100%; height:150px; display:block}
+  .cities{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:-6px}
+  @media(max-width:760px){.voyage svg{display:none} .cities{grid-template-columns:1fr}}
+  .city{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; transition:all .2s}
+  .city:hover{border-color:var(--accent); transform:translateY(-3px)}
+  .city.active{border-color:var(--warm); background:linear-gradient(180deg,#fff,var(--warm-soft))}
+  .city .cc{display:flex; align-items:center; gap:8px}
+  .city .pin{width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-family:var(--mono); font-size:11px; display:flex; align-items:center; justify-content:center; font-weight:600; flex-shrink:0}
+  .city.active .pin{background:var(--warm)}
+  .city .cname{font-weight:600; font-size:16px; letter-spacing:-.3px}
+  .city .crole{font-family:var(--mono); font-size:10.5px; color:var(--accent); margin-top:10px; text-transform:uppercase; letter-spacing:.5px}
+  .city.active .crole{color:var(--warm)}
+  .city .cdesc{font-size:12.5px; color:var(--slate); margin-top:8px; line-height:1.5}
+  .city .cname{display:flex; align-items:center}
+  .cfirms{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px}
+  .cfirm{font-family:var(--mono); font-size:10px; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:3px 7px; color:var(--slate)}
+  .nowtag{font-family:var(--mono); font-size:9px; background:var(--warm); color:#fff; padding:2px 6px; border-radius:4px; letter-spacing:.5px; margin-left:8px}
+  .city{cursor:pointer}
+  .cview{font-family:var(--mono); font-size:10px; color:var(--accent); margin-top:12px; letter-spacing:.5px; opacity:0; transition:opacity .2s}
+  .city:hover .cview{opacity:1}
+
+  /* work, distinct mode cards */
+  .theme{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin-bottom:16px}
+  .theadhd{display:flex; align-items:center; gap:14px; margin-bottom:4px}
+  .theadhd .tnum{width:38px; height:38px; border-radius:10px; background:var(--warm); color:#fff; font-family:var(--mono); font-size:17px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0}
+  .theadhd .tkick{font-family:var(--mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--slate2)}
+  .theadhd .tname{font-family:var(--serif); font-size:21px; font-weight:500; letter-spacing:-.4px; line-height:1.15}
+  .tthesis{font-size:13.5px; color:var(--slate); margin:8px 0 18px 52px; max-width:70ch}
+  @media(max-width:680px){.tthesis{margin-left:0}}
+  .fcards{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media(max-width:680px){.fcards{grid-template-columns:1fr}}
+  .fcard{background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:22px; cursor:pointer; transition:all .18s; text-align:left; font:inherit; width:100%}
+  .fcard:hover{border-color:var(--accent); transform:translateY(-3px); box-shadow:0 10px 26px -16px rgba(20,21,23,.3)}
+  .fcard .ftop{display:flex; justify-content:space-between; align-items:flex-start; gap:14px}
+  .fcard .fhl{font-size:16.5px; font-weight:600; letter-spacing:-.3px; line-height:1.32}
+  .fcard .fmetric{font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--accent); background:var(--accent-soft); padding:4px 9px; border-radius:6px; white-space:nowrap}
+  .fcard .fmeta{font-size:12px; color:var(--slate); margin-top:9px}
+  .fcard .fread{font-family:var(--mono); font-size:10px; color:var(--accent); margin-top:14px; letter-spacing:.5px}
+  .plist{margin-top:14px; display:flex; flex-direction:column; gap:9px}
+  .pli{display:flex; gap:11px; font-size:13.5px; color:var(--ink2); line-height:1.5}
+  .pli .pdot{color:var(--warm); margin-top:1px}
+  .pli b{font-weight:600}
+
+  /* skills & education */
+  .skedu{display:grid; grid-template-columns:1fr 1fr; gap:32px}
+  @media(max-width:760px){.skedu{grid-template-columns:1fr; gap:28px}}
+  .skblock .sklabel, .edblock .sklabel{font-family:var(--mono); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--slate2); margin-bottom:14px}
+  .skgroup{margin-bottom:18px}
+  .skgroup .sgt{font-size:13px; font-weight:600; color:var(--ink); margin-bottom:9px}
+  .chips{display:flex; gap:7px; flex-wrap:wrap}
+  .chip{background:var(--card); border:1px solid var(--line); border-radius:7px; padding:6px 11px; font-size:12.5px; color:var(--ink2)}
+  .chip.core{border-color:var(--accent); color:var(--accent); background:var(--accent-soft)}
+  .edrow{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:16px 18px; margin-bottom:10px}
+  .edrow .ed1{font-weight:600; font-size:14.5px}
+  .edrow .ed2{font-size:13px; color:var(--slate); margin-top:3px}
+  .edrow .ed3{font-family:var(--mono); font-size:11px; color:var(--warm); margin-top:6px}
+  .certs{font-size:12.5px; color:var(--slate); margin-top:12px; line-height:1.7}
+  .certs b{color:var(--ink2); font-weight:500}
+
+  /* portfolio */
+  .pglabel{font-family:var(--mono); font-size:11px; color:var(--slate2); letter-spacing:1px; text-transform:uppercase; margin:0 0 14px}
+  .repos{display:grid; grid-template-columns:repeat(4,1fr); gap:13px; margin-bottom:26px}
+  @media(max-width:900px){.repos{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.repos{grid-template-columns:1fr}}
+  .repo{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:17px; text-decoration:none; display:block; transition:all .2s}
+  .repo:hover{transform:translateY(-3px); border-color:var(--accent)}
+  .repo .rn{font-family:var(--mono); font-size:12px; font-weight:500; color:var(--ink); display:flex; align-items:center; gap:7px; line-height:1.3}
+  .repo .rn .dot{width:7px; height:7px; border-radius:2px; background:var(--accent); flex-shrink:0}
+  .repo.ai .rn .dot{background:var(--warm)}
+  .repo .rd{font-size:12.5px; color:var(--slate); margin-top:9px; line-height:1.5}
+  .repo .rt{font-family:var(--mono); font-size:10px; color:var(--slate2); margin-top:11px; letter-spacing:.5px}
+
+  /* ai twin */
+  .twin{background:var(--ink); border-radius:18px; padding:38px 40px; display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center; position:relative; overflow:hidden}
+  @media(max-width:760px){.twin{grid-template-columns:1fr; padding:28px}}
+  .twin::before{content:""; position:absolute; top:-50px; right:-30px; width:220px; height:220px; background:radial-gradient(circle,rgba(232,97,60,.28),transparent 70%)}
+  .twin .tw-l{position:relative}
+  .twin .tw-tag{font-family:var(--mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--warm)}
+  .twin h3{font-family:var(--serif); color:#fff; font-size:26px; font-weight:500; margin-top:12px; letter-spacing:-.4px; line-height:1.2}
+  .twin p{color:#a2a4ab; font-size:14.5px; margin-top:12px; line-height:1.6}
+  .chatbox{background:#1c1d21; border:1px solid #2c2d32; border-radius:14px; padding:16px; position:relative}
+  .bubble{border-radius:12px; padding:11px 14px; font-size:13.5px; line-height:1.5; margin-bottom:10px; max-width:88%}
+  .bubble.q{background:var(--accent); color:#fff; margin-left:auto; border-bottom-right-radius:4px}
+  .bubble.a{background:#2a2b30; color:#dcdde1; border-bottom-left-radius:4px}
+  .chatin{display:flex; gap:8px; margin-top:6px}
+  .chatin input{flex:1; background:#141517; border:1px solid #2c2d32; border-radius:9px; padding:11px 13px; color:#dcdde1; font-size:13px; font-family:inherit}
+  .chatin input::placeholder{color:#6a6b71}
+  .chatin .send{background:var(--warm); border:none; border-radius:9px; padding:0 15px; color:#fff; font-size:16px; cursor:not-allowed; opacity:.85}
+  .twin .soon{position:absolute; top:14px; right:14px; font-family:var(--mono); font-size:9.5px; letter-spacing:1px; background:rgba(232,97,60,.16); color:var(--warm); padding:3px 9px; border-radius:5px}
+
+  .contact{background:var(--warm); border-radius:18px; padding:52px 46px; margin:26px 0 34px; text-align:center; position:relative; overflow:hidden}
+  .contact h2{font-family:var(--serif); color:#fff; font-size:clamp(28px,4vw,40px); font-weight:500; letter-spacing:-.6px}
+  .contact p{color:#ffe6dd; max-width:52ch; margin:14px auto 0; font-size:16px}
+  .cbtns{margin-top:28px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+  .cbtns a{font-size:14px; font-weight:500; padding:13px 24px; border-radius:9px; text-decoration:none; border:1px solid rgba(255,255,255,.4); color:#fff; display:inline-flex; gap:8px; align-items:center; transition:all .15s}
+  .cbtns a.solid{background:#fff; color:var(--warm); border-color:#fff}
+  .cbtns a:hover{background:rgba(255,255,255,.16)}
+  .cbtns a.solid:hover{background:var(--ink); color:#fff; border-color:var(--ink)}
+  footer{text-align:center; color:var(--slate2); font-size:12px; padding:18px 0 50px; font-family:var(--mono)}
+
+  .overlay{position:fixed; inset:0; background:rgba(20,21,23,.55); backdrop-filter:blur(4px); z-index:100; display:none; align-items:flex-start; justify-content:center; padding:5vh 20px; overflow-y:auto}
+  .overlay.on{display:flex}
+  .modal{background:var(--card); border-radius:16px; max-width:660px; width:100%; padding:38px 42px; position:relative; margin:auto}
+  @media(max-width:600px){.modal{padding:26px 22px}}
+  .modal .close{position:absolute; top:20px; right:22px; width:32px; height:32px; border-radius:8px; border:1px solid var(--line2); background:var(--card); cursor:pointer; font-size:18px; color:var(--slate); display:flex; align-items:center; justify-content:center}
+  .modal .close:hover{border-color:var(--ink)}
+  .modal .mmetric{font-family:var(--mono); font-size:13px; font-weight:600; color:var(--accent); background:var(--accent-soft); padding:5px 12px; border-radius:6px; display:inline-block}
+  .modal h3{font-family:var(--serif); font-size:24px; font-weight:500; letter-spacing:-.4px; line-height:1.22; margin:16px 0 6px}
+  .modal .mmeta{font-family:var(--mono); font-size:12px; color:var(--slate); text-transform:uppercase; letter-spacing:.5px; margin-bottom:22px}
+  .mblock{margin-bottom:18px}
+  .mblabel{font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--warm); margin-bottom:6px}
+  .mbtext{font-size:15px; color:var(--ink2); line-height:1.62}
+  .mwhy{border-left:3px solid var(--warm); padding:10px 16px; font-size:14px; color:var(--slate); background:var(--warm-soft); border-radius:0 8px 8px 0; margin-top:20px}
+  .mitem{display:flex; gap:14px; align-items:flex-start; margin-bottom:18px}
+  .mlogo{width:40px; height:40px; border-radius:9px; color:#fff; font-family:var(--mono); font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0}
+  .mblabel2{font-size:14px; font-weight:600; color:var(--ink); margin-bottom:3px; line-height:1.3}
+  .demo{position:fixed; bottom:14px; right:14px; background:var(--ink); color:#fff; font-family:var(--mono); font-size:11px; padding:6px 12px; border-radius:7px; letter-spacing:.5px; z-index:60}
+  @media(max-width:600px){
+    .wrap{padding:0 20px}
+    .hero{padding:44px 0 30px}
+    .sec{padding:42px 0 4px}
+    .theme{padding:20px 18px}
+    .facts{flex-direction:column; align-items:stretch}
+    .fact{padding:11px 14px}
+    .fact + .fact{border-left:none; border-top:1px solid var(--line)}
+    .herocta{gap:10px}
+    .herocta .btn{flex:1 1 auto; justify-content:center}
+    .btn{padding:11px 16px; font-size:13.5px}
+    .modal{padding:26px 20px}
+    .contact{padding:40px 24px}
+    .twin{padding:26px 22px}
+    .fcards{grid-template-columns:1fr}
+    .sectitle{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navin">
+    <div class="brand">Jamie Chong</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="navcta" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="micro">Strategy × Data · commercial operator · Melbourne ⇄ Singapore</div>
+  <h1>I turn complex data into <span class="hl">decisions.</span></h1>
+  <p class="lede">Decisions that move money, strategy, and teams. Across ~4 years in APAC fintech, OTT media and SaaS, I've built the <b>business cases behind multi-million-dollar deals</b>, <b>launched regional lending products from zero</b>, and <b>shipped product in regulated environments</b>, working alongside founders, CEOs and senior leaders. Now in Melbourne, adding a Master of Data Science to that operator's foundation.</p>
+  <div class="herocta">
+    <a class="btn solid" href="#work">See selected work →</a>
+    <button class="btn" onclick="copySummary()"><span class="mono" style="color:var(--warm)">⧉</span> <span id="copytxt">Copy candidate summary</span></button>
+    <a class="btn ghost" href="cv.pdf" download>Download CV</a>
+  </div>
+  <div class="facts">
+    <div class="fact"><span class="fl">Available</span><span class="fv">Now</span></div>
+    <div class="fact"><span class="flag">AU</span><span class="fv">Full work rights</span></div>
+    <div class="fact"><span class="flag">SG</span><span class="fv">Permanent Resident</span></div>
+    <div class="fact"><span class="fl">Targeting</span><span class="fv">Strategy · Commercial · Product Analyst</span></div>
+  </div>
+</header>
+
+<section class="sec wrap" id="about">
+  <div class="shead"><span class="snum">01</span><span class="slabel">About</span></div>
+  <h2 class="sectitle">Who I am</h2>
+  <div class="about" style="margin-top:26px">
+    <div class="photo">
+      <img src="jamie-photo.jpg" alt="Jamie Chong" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+      <div class="mono-badge"><b>Jamie Chong</b><br>Ipoh → Hong Kong → Singapore → Melbourne</div>
+    </div>
+    <div class="abouttext">
+      <p class="lead">I grew up in Ipoh and have been chasing interesting problems across Asia-Pacific ever since.</p>
+      <p>A risk-management degree in Hong Kong, the fast lane of Singapore's digital banks and streaming wars, and now a Master of Data Science in Melbourne. I've made a habit of dropping into a new country, culture and problem and quickly becoming useful, reading how a business actually works, earning trust across very different teams, then turning that into decisions and delivery.</p>
+      <p>What I like is the messy middle of a problem: the point where nobody's sure what the right call is, and someone has to turn scattered data into something a team can act on. Translating commercial intent into what gets built, and back again, is the thread through everything I've done.</p>
+      <div class="tags">
+        <span class="tagi"><b>Cross-market operator</b>, four countries, six-plus organisations, from a global bank's trade floor to a startup founder's desk.</span>
+        <span class="tagi"><b>Adaptable by default</b>, comfortable being the newcomer who assimilates fast and ships anyway.</span>
+        <span class="tagi"><b>AI-native operator</b>, I build my own LLM tools and champion AI adoption in the teams I join.</span>
+        <span class="tagi"><b>Off the clock</b>, tennis and trekking. Multilingual across APAC markets.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="journey">
+  <hr class="divider" style="margin:44px 0 40px">
+  <div class="shead"><span class="snum">02</span><span class="slabel">Journey</span></div>
+  <h2 class="sectitle">A four-market voyage</h2>
+  <p class="secsub">From hometown, to study, to career, to upskilling, Ipoh to Hong Kong to Singapore to Melbourne.</p>
+  <div class="voyage">
+    <svg viewBox="0 0 1080 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="arw" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#e8613c" stroke-width="1.5"/></marker></defs>
+      <path id="route" d="M135,105 Q285,30 415,80 T690,70 Q830,110 945,45" fill="none" stroke="#e8613c" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arw)" opacity="0.75"/>
+      <circle r="4" fill="#2e5bff"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
+      <circle r="4" fill="#e8613c"><animateMotion dur="7s" begin="2.4s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
+      <circle r="3" fill="#2e5bff" opacity="0.5"><animateMotion dur="7s" begin="4.8s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
+      <circle cx="135" cy="105" r="7" fill="#fff" stroke="#2e5bff" stroke-width="2.5"/>
+      <circle cx="415" cy="80" r="7" fill="#fff" stroke="#2e5bff" stroke-width="2.5"/>
+      <circle cx="680" cy="70" r="7" fill="#fff" stroke="#2e5bff" stroke-width="2.5"/>
+      <circle cx="945" cy="45" r="9" fill="none" stroke="#e8613c" stroke-width="2"><animate attributeName="r" values="9;17;9" dur="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="2.6s" repeatCount="indefinite"/></circle>
+      <circle cx="945" cy="45" r="9" fill="#e8613c" stroke="#e8613c" stroke-width="2.5"/><circle cx="945" cy="45" r="3" fill="#fff"/>
+      <text x="135" y="132" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5f6169">Ipoh, Malaysia</text>
+      <text x="415" y="107" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5f6169">Hong Kong</text>
+      <text x="680" y="97" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5f6169">Singapore</text>
+      <text x="945" y="72" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#141517" font-weight="600">Melbourne</text>
+    </svg>
+  </div>
+  <div class="cities">
+    <div class="city" onclick="openCity(0)"><div class="cc"><span class="pin">1</span><span class="cname">Ipoh, Malaysia</span></div><div class="crole">Where it began</div><div class="cdesc">Hometown. First commercial-consulting exposure.</div><div class="cfirms"><span class="cfirm">Mastercard Advisors</span></div><div class="cview">View roles →</div></div>
+    <div class="city" onclick="openCity(1)"><div class="cc"><span class="pin">2</span><span class="cname">Hong Kong</span></div><div class="crole">2017–21 · study + first roles</div><div class="cdesc">HKUST, Risk Management & Business Intelligence, First Class Honours.</div><div class="cfirms"><span class="cfirm">HKUST</span><span class="cfirm">UBS</span><span class="cfirm">Avista</span></div><div class="cview">View roles →</div></div>
+    <div class="city" onclick="openCity(2)"><div class="cc"><span class="pin">3</span><span class="cname">Singapore</span></div><div class="crole">2021–24 · career built</div><div class="cdesc">Digital banking and regional lending, then OTT-media strategy in a CEO office.</div><div class="cfirms"><span class="cfirm">Monee</span><span class="cfirm">Viu · PCCW</span></div><div class="cview">View roles →</div></div>
+    <div class="city active" onclick="openCity(3)"><div class="cc"><span class="pin">4</span><span class="cname">Melbourne</span><span class="nowtag">now</span></div><div class="crole">2024– · upskill</div><div class="cdesc">Master of Data Science, plus SaaS and energy-sector consulting.</div><div class="cfirms"><span class="cfirm">Monash</span><span class="cfirm">Andisor</span><span class="cfirm">Flexiq</span></div><div class="cview">View roles →</div></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="work">
+  <hr class="divider" style="margin:44px 0 40px">
+  <div class="shead"><span class="snum">03</span><span class="slabel">Selected work</span></div>
+  <h2 class="sectitle">What I do, in three modes</h2>
+  <p class="secsub">The same operator across business-case work, revenue creation, and delivery. Click a card to read the full memo.</p>
+
+  <div class="theme">
+    <div class="theadhd"><span class="tnum">A</span><div><div class="tkick">Mode A</div><div class="tname">Business cases & capital allocation</div></div></div>
+    <p class="tthesis">Building the models and the logic that decide where money goes, then getting the organisation to standardise on them.</p>
+    <div class="fcards">
+      <button class="fcard" onclick="openModal(0)">
+        <div class="ftop"><span class="fhl">“Which titles earn their keep,” made a firm-wide standard</span><span class="fmetric">Firm-wide</span></div>
+        <div class="fmeta">Viu / PCCW · CEO office · 2023–24</div>
+        <div class="fread">READ MEMO →</div>
+      </button>
+      <div>
+        <div class="plist">
+          <div class="pli"><span class="pdot">▹</span><span>Co-built the <b>company-wide business-case template</b>, standardised deal logic across all APAC teams.</span></div>
+          <div class="pli"><span class="pdot">▹</span><span>Owned the <b>monthly commercial story for senior management and the Board</b>, P&L-driver and competitor analysis that surfaced margin risk early.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theadhd"><span class="tnum">B</span><div><div class="tkick">Mode B</div><div class="tname">New revenue & market expansion</div></div></div>
+    <p class="tthesis">Spotting the underserved gap, then actually launching the product that fills it, analysis and shipping in one person.</p>
+    <div class="fcards">
+      <button class="fcard" onclick="openModal(1)">
+        <div class="ftop"><span class="fhl">Standing up a bank-to-bank loan-channelling business, 0 to 1</span><span class="fmetric">0 → 1 launch</span></div>
+        <div class="fmeta">Monee · 2021–23</div>
+        <div class="fread">READ MEMO →</div>
+      </button>
+      <button class="fcard" onclick="openModal(2)">
+        <div class="ftop"><span class="fhl">Founder's commercial co-pilot in B2B SaaS</span><span class="fmetric">−20% cycle</span></div>
+        <div class="fmeta">Andisor · Strategy Analyst · 2024–25</div>
+        <div class="fread">READ MEMO →</div>
+      </button>
+    </div>
+    <div class="plist" style="margin-top:12px">
+      <div class="pli"><span class="pdot">▹</span><span>Identified <b>SME lending as an underserved regional gap</b> and delivered the data-backed recommendation that shaped commercial-lending expansion.</span></div>
+      <div class="pli"><span class="pdot">▹</span><span>Involved at the <b>initial stage of adjacent lending products</b>, pay-later, credit card and cash-loan, broadening the portfolio beyond a single core product.</span></div>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theadhd"><span class="tnum">C</span><div><div class="tkick">Mode C</div><div class="tname">Product & operational delivery</div></div></div>
+    <p class="tthesis">Shipping product in regulated, high-stakes environments, then building the systems that make delivery visible and fast.</p>
+    <div class="fcards">
+      <button class="fcard" onclick="openModal(3)">
+        <div class="ftop"><span class="fhl">Screening a million loan applications a day</span><span class="fmetric">−30% onboarding</span></div>
+        <div class="fmeta">Monee · Product Mgmt · 2021–22</div>
+        <div class="fread">READ MEMO →</div>
+      </button>
+      <button class="fcard" onclick="openModal(4)">
+        <div class="ftop"><span class="fhl">From anecdote to evidence in energy delivery</span><span class="fmetric">~A$40K/yr</span></div>
+        <div class="fmeta">Flexiq · Program Analyst · 2026–now</div>
+        <div class="fread">READ MEMO →</div>
+      </button>
+    </div>
+    <div class="plist" style="margin-top:12px">
+      <div class="pli"><span class="pdot">▹</span><span>Brought the <b>direct-lending launch and partner loan-channelling integrations live front-to-back</b>, leading seven functions across regional and local teams.</span></div>
+      <div class="pli"><span class="pdot">▹</span><span>At UBS, <b>migrated 50% of trade-floor bankers to cloud in two weeks</b> during COVID; built an ML clustering model shaping the firm-wide agile-working roadmap.</span></div>
+      <div class="pli"><span class="pdot">▹</span><span>At Flexiq, <b>ran an internal AI skills workshop and drove AI adoption</b> across the team, turning personal AI tooling into shared practice.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="skills">
+  <hr class="divider" style="margin:44px 0 40px">
+  <div class="shead"><span class="snum">04</span><span class="slabel">Skills & education</span></div>
+  <h2 class="sectitle">Toolkit & credentials</h2>
+  <div class="skedu" style="margin-top:26px">
+    <div class="skblock">
+      <div class="sklabel">What I work with</div>
+      <div class="skgroup">
+        <div class="sgt">Strategic & commercial</div>
+        <div class="chips">
+          <span class="chip core">Business cases</span><span class="chip core">Financial modelling</span>
+          <span class="chip">Investment & partnership evaluation</span><span class="chip">Scenario modelling</span>
+          <span class="chip">Competitive analysis</span><span class="chip">Executive storytelling</span>
+        </div>
+      </div>
+      <div class="skgroup">
+        <div class="sgt">Data & technical</div>
+        <div class="chips">
+          <span class="chip core">Python</span><span class="chip core">SQL</span><span class="chip">R</span>
+          <span class="chip">PySpark</span><span class="chip">Machine Learning</span><span class="chip">Tableau</span>
+          <span class="chip">Power BI</span><span class="chip">Power Query</span><span class="chip">Advanced Excel</span>
+        </div>
+      </div>
+      <div class="skgroup">
+        <div class="sgt">AI & automation</div>
+        <div class="chips">
+          <span class="chip core">LLM app development</span><span class="chip core">Prompt engineering</span>
+          <span class="chip">AI workflow automation</span><span class="chip">Gemini / OpenAI APIs</span>
+          <span class="chip">AI enablement & evangelism</span>
+        </div>
+      </div>
+    </div>
+    <div class="edblock">
+      <div class="sklabel">Education</div>
+      <div class="edrow"><div class="ed1">Master of Data Science</div><div class="ed2">Monash University, Melbourne</div><div class="ed3">2024–2026 · GPA 3.8/4.0 · Study Grant A$10K</div></div>
+      <div class="edrow"><div class="ed1">BSc Risk Management & Business Intelligence</div><div class="ed2">HKUST, Hong Kong · First Class Honours</div><div class="ed3">2017–2021 · Malaysia Chamber of Commerce (HK & Macau) Student Trust Fund, HK$160,000</div></div>
+      <div class="certs"><b>Certifications:</b> IMF Financial Market Analysis (FMAx) · Machine Learning for Data Analysis · Google Project Management · Global Financial Markets & Instruments · Power BI (DavidsonX)</div>
+      <div class="certs" style="margin-top:8px"><b>Awards:</b> Outstanding Scholar (GCE A-Level) · Tuition Fee Waiver Scholarship · First Runner-up, Indonesia Investment Case Competition 2019 · Finalist, AlphaSights Hong Kong Case Competition 2019</div>
+      <div class="certs" style="margin-top:8px"><b>Languages:</b> Mandarin & English (native) · Cantonese · Malay · Indonesian</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="portfolio">
+  <hr class="divider" style="margin:44px 0 40px">
+  <div class="shead"><span class="snum">05</span><span class="slabel">Portfolio</span></div>
+  <h2 class="sectitle">Things I've built</h2>
+  <p class="secsub">Public repositories, decision-grade data products and AI-powered tools. github.com/mschonghuiying-hub</p>
+  <div class="pglabel">Data & analytics</div>
+  <div class="repos">
+    <a class="repo" href="https://github.com/mschonghuiying-hub/commercial-energy-intelligence"><div class="rn"><span class="dot"></span> commercial-energy-intelligence</div><div class="rd">Real-time energy demand intelligence on Spark and Kafka.</div><div class="rt">PYTHON · SPARK · KAFKA</div></a>
+    <a class="repo" href="https://github.com/mschonghuiying-hub/property-market-analysis-spark"><div class="rn"><span class="dot"></span> property-market-analysis</div><div class="rd">~4.8M NSW property transactions, pricing, seasonality, segmentation.</div><div class="rt">SPARK · JUPYTER</div></a>
+    <a class="repo" href="https://github.com/mschonghuiying-hub/migration-in-motion"><div class="rn"><span class="dot"></span> migration-in-motion</div><div class="rd">R Shiny dashboard on Australian migration dynamics, ABS data.</div><div class="rt">R · SHINY</div></a>
+    <a class="repo" href="https://github.com/mschonghuiying-hub/e-commerce-data-quality"><div class="rn"><span class="dot"></span> e-commerce-data-quality</div><div class="rd">Production-style pipeline validating pricing and delivery data.</div><div class="rt">PYTHON · DATA QUALITY</div></a>
+  </div>
+  <div class="pglabel">AI-powered tools <span style="color:var(--warm)">· I ship with LLMs</span></div>
+  <div class="repos">
+    <a class="repo ai" href="https://github.com/mschonghuiying-hub/auto_record_expense"><div class="rn"><span class="dot"></span> auto_record_expense</div><div class="rd">Serverless Telegram bot auto-logging expenses to Google Sheets.</div><div class="rt">JS · SERVERLESS · LLM</div></a>
+    <a class="repo ai" href="https://github.com/mschonghuiying-hub"><div class="rn"><span class="dot"></span> calorie-tracker-bot</div><div class="rd">Gemini-powered Telegram bot logging calories from meal text.</div><div class="rt">GEMINI · confirm URL</div></a>
+    <a class="repo ai" href="https://github.com/mschonghuiying-hub"><div class="rn"><span class="dot"></span> ai-cv-screening</div><div class="rd">AI CV-screening web app (co-building), parses and ranks candidates.</div><div class="rt">LLM · WEB · confirm URL</div></a>
+    <a class="repo ai" href="https://github.com/mschonghuiying-hub"><div class="rn"><span class="dot"></span> more on GitHub</div><div class="rd">R Shiny migration dashboard, Spark/Kafka pipelines, and more.</div><div class="rt">VIEW PROFILE →</div></a>
+  </div>
+</section>
+
+<section class="sec wrap" id="twin">
+  <hr class="divider" style="margin:44px 0 34px">
+  <div class="twin">
+    <div class="tw-l">
+      <div class="tw-tag">06 / Ask my AI twin</div>
+      <h3>Don't just read about me, ask.</h3>
+      <p>I built an AI twin trained on my real experience and case studies. Ask it about a project, how I'd approach a problem, or whether I'm a fit for your role. It answers from my actual background, and says so when something's outside it.</p>
+      <p style="color:#7f8598; font-size:13px">Building this is part of how I work: I ship LLM tools and help teams adopt AI. This twin is one of them.</p>
+    </div>
+    <div class="chatbox">
+      <span class="soon">Coming soon</span>
+      <div class="bubble q">How did Jamie cut KYC onboarding time by 30%?</div>
+      <div class="bubble a">Great question, let me walk you through the checkpoint she redesigned and the trade-off she had to protect…</div>
+      <div class="chatin">
+        <input type="text" placeholder="Ask anything about Jamie's work…" disabled>
+        <button class="send" title="Coming soon">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="contact">
+  <div class="contact">
+    <h2>Let's talk.</h2>
+    <p>Open to Strategy, Commercial, and Product Analyst roles in Melbourne and Singapore. Available now, one email and I'll reply quickly.</p>
+    <div class="cbtns">
+      <a class="solid" href="mailto:mschonghuiying@gmail.com">✉ mschonghuiying@gmail.com</a>
+      <a href="https://linkedin.com/in/jamie-chong">in · LinkedIn</a>
+      <a href="https://github.com/mschonghuiying-hub">◇ GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">Jamie Chong · Melbourne ⇄ Singapore · 2026</footer>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"><div class="modal" id="modal"></div></div>
+
+<script>
+const cases = [
+  {hl:"“Which titles earn their keep,” made a firm-wide standard", meta:"Snr Strategy & Insights Analyst · Viu / PCCW CEO office · 2023–2024", metric:"Adopted firm-wide",
+   s:"Viu, PCCW's APAC OTT platform, judged content spend across advertising, subscription and live-events lines, but the view of which titles actually returned their cost lived in a model that was painful to keep current. It had to pull viewership, finance, targets and cost from several different sources, and refreshing it each cycle was a manual slog.",
+   d:"Leadership needed a per-title view of return they could trust for budget and greenlight calls. But every market ran slightly differently, on workflows people already relied on, push too hard and you break business-as-usual, too soft and nothing changes.",
+   w:"I kept the underlying return logic but rebuilt how it ran. First I aligned the methodology with each market's leads so it fit how they actually worked, then partnered with the data team to automate the ingestion from those multiple sources into a Snowflake pipeline dashboard, same decisions, far less manual effort, and a number people trusted because they'd helped shape it. The framing mattered: an enhancement on top of existing workflow, not a disruption to it. Knowing people are naturally hesitant about a new tool, I rolled it out gradually, a proper intro session, a hands-on workshop, and follow-ups with stakeholders rather than a mandate dropped from above.",
+   o:"With the regional office sitting alongside the CEO, the work had leadership sponsorship and buy-in, and the index became the tool teams used for budget allocation and per-title breakeven reviews. The business-case template built on the same logic became the APAC standard, adoption held because it was both sponsored from the top and genuinely easier than what it replaced.",
+   y:"Built the instrument, fit it to how each market actually worked, and drove adoption through change management and executive sponsorship. Not just analysis, getting an organisation to change how it decides."},
+  {hl:"Standing up a bank-to-bank loan-channelling business, 0 to 1", meta:"Monee · Product & Regional PMO · 2021–2023", metric:"0 → 1 launch",
+   s:"A digital bank operating at significant regional scale was concentrated in a single core product, its own cash loans. To diversify revenue and reach more borrowers, it set out to channel loans through other banks and financial institutions across Southeast Asia, a business line that didn't exist yet.",
+   d:"Standing this up from nothing meant solving four problems at once: a commercial model both sides would sign, partnership terms aligned with external institutions, a technical integration linking two companies' systems, and credit-risk and compliance sign-off before anything went live, all under pressure to hit an aggressive timeline.",
+   w:"I ran it as the PMO sitting in the middle of all four. The commercial model came out of research and negotiation, structuring terms that worked for both the bank and each partner. The technical integration was the harder part: linking two organisations' systems takes heavy pre-work, shared understanding and alignment sessions, so I made myself the connective tissue, getting the right people from each side into the right conversation, removing blockers, and keeping requirements and expectations explicit. When a partner ran short on engineering resource, I didn't let it stall: I offered resourcing support for testing and set us up to validate in a sandbox first, focused on the high-risk cases that mattered most to both compliance and commercial.",
+   o:"There was real pressure to launch at full volume on the timeline, and compliance had concerns. Rather than pick a side, I brokered the middle ground, enough testing to satisfy compliance, then a phased, gradually ramping traffic load instead of a big-bang cutover, run through a proper governance framework: QA to UAT to production, with post-production monitoring, a post-mortem, and regular catch-ups. A first partner went live and stayed live, a new origination channel that hadn't existed before, opening the bank beyond its own balance sheet.",
+   y:"0 to 1 across every axis, commercial negotiation, partnership alignment, technical integration, compliance and launch, held together by someone in the middle keeping it moving. Exactly the cross-functional, get-it-live operator work that strategy and product roles hire for."},
+  {hl:"Founder's commercial co-pilot in a B2B SaaS marketplace", meta:"Strategy Analyst · Andisor · Dec 2024–Mar 2025", metric:"−20% sales cycle",
+   s:"Andisor is a Melbourne B2B SaaS wholesale marketplace connecting brands and retailers. The founder needed to lift outbound conversion and understand user behaviour on both sides of a two-sided market, with no dedicated analytics function.",
+   d:"Where in the funnel was revenue leaking, and which onboarding and sourcing decisions would actually move conversion and retention?",
+   w:"Partnered directly with the founder on sales-optimisation initiatives, built executive dashboards tracking deal performance, engagement, and product usage, and used product-analytics tools (PostHog, SQL) to find behaviour patterns and fix onboarding flows across both suppliers and retailers.",
+   o:"Cut sales-cycle time by roughly 20% and gave leadership a live view of deal and usage performance to steer sourcing and merchandising.",
+   y:"SaaS, two-sided marketplace, founder-adjacent, the product-analytics-to-commercial-decision loop growth and product roles hire for."},
+  {hl:"Screening a million loan applications a day", meta:"Product Mgmt Associate · Monee · 2021–2022", metric:"−30% onboarding",
+   s:"A digital bank was scaling direct lending across Southeast Asia. Its KYC checkpoint sat in front of the entire loan funnel, roughly one million applications a day, and was slow enough to cost real loan volume, under hard regulatory requirements that couldn't bend.",
+   d:"How do you make onboarding faster without dropping a compliance control that regulators, credit risk, and finance all hold a veto over? The safe-looking move was to change nothing; the naive one was to relax the checks. Neither was acceptable.",
+   w:"Instead of trying to make the checks themselves faster, I went back to the actual application flow and traffic and found the bottleneck wasn't the checks, it was how load was split between the automated system lane and the manual human-review lane. Too many applications were being routed to slow manual screening that stronger system checks could clear. I rebalanced the split: hardened the automated checks so they could confidently clear low-risk applications, and reserved human screening for the cases that genuinely needed a person. Crucially, I designed the routing so that balance could be tuned over time rather than hard-coded, as confidence in the system grew, more volume could shift across without a rebuild. Because it touched a compliance control, I released it gradually, shifting volume toward the automated lane in controlled increments with human reviewers on standby and close monitoring at each step, rather than a big-bang switch.",
+   o:"Onboarding time fell 30% across the ~1M-applications/day funnel while staying inside regulatory limits. Because it went out in phases with monitoring and a human fallback, each increment was proven before it widened, a durable throughput gain on the checkpoint every loan had to pass, backed by post-mortem review and continuous tuning rather than surprises in production.",
+   y:"The whole hybrid-operator argument in one story: I found the bottleneck by reading the system, made a routing-architecture call, and managed real compliance risk through a release strategy across many veto-holding stakeholders. Analysis, product judgment, and stakeholder management in the same person."},
+  {hl:"From anecdote to evidence in energy-sector delivery", meta:"Program Analyst · Flexiq · 2026–present", metric:"~A$40K/yr saved",
+   s:"Program delivery across energy-sector client engagements was being reviewed on anecdote, and client reporting was rebuilt by hand in Excel every month, slow and expensive in consultant time.",
+   d:"Where should client leadership spend limited remediation effort, and how do you free senior consultants from manual reporting without losing quality?",
+   w:"Diagnosed delivery bottlenecks and translated them into a KPI framework client leadership now uses to prioritise remediation, shifting reviews from anecdote to evidence. Rebuilt reporting from manual Excel into automated Tableau and Power BI pipelines ingesting directly from source systems via Python and Power Query.",
+   o:"Roughly 32 consultant workdays saved a year (~A$40K in delivery cost), with on-demand visibility for senior client stakeholders replacing the monthly manual cycle.",
+   y:"Current, Australian, same instinct in a new market, build the decision framework, then automate the busywork underneath it."}
+];
+function openModal(i){const c=cases[i];document.getElementById('modal').innerHTML=`<button class="close" onclick="closeModal()">×</button><span class="mmetric">${c.metric}</span><h3>${c.hl}</h3><div class="mmeta">${c.meta}</div><div class="mblock"><div class="mblabel">Situation</div><div class="mbtext">${c.s}</div></div><div class="mblock"><div class="mblabel">Decision at stake</div><div class="mbtext">${c.d}</div></div><div class="mblock"><div class="mblabel">What I did</div><div class="mbtext">${c.w}</div></div><div class="mblock"><div class="mblabel">Commercial outcome</div><div class="mbtext">${c.o}</div></div><div class="mwhy">${c.y}</div>`;document.getElementById('overlay').classList.add('on');document.body.style.overflow='hidden';}
+const citiesData=[
+ {t:"Ipoh, Malaysia",p:"Where it began · hometown",items:[
+   ["IP","#e8613c","Roots","Grew up in Ipoh, Perak, the starting point of a four-market journey across Asia-Pacific."],
+   ["MA","#cc3311","Mastercard Advisors, Summer Consultant (KL, 2019)","Benchmarked Malaysia's commercial credit-card market for a bank targeting 50k SME cards; built an Excel VBA sales toolkit for outbound callers."]
+ ]},
+ {t:"Hong Kong",p:"2017–2021 · study + first roles",items:[
+   ["HK","#003a70","HKUST, BSc Risk Management & Business Intelligence","First Class Honours. Semester exchange at Lancaster University (2020). Malaysia Chamber of Commerce (HK & Macau) Student Trust Fund, HK$160,000."],
+   ["UBS","#d5252a","UBS, Summer Analyst, IB APAC COO (2020)","Championed a COVID-era cloud migration, moving 50% of trade-floor bankers to cloud in two weeks; built an ML employee-clustering model for the firm-wide agile-working roadmap."],
+   ["AV","#6b7280","Avista Group, Internal Control intern (2018–19)","Risk and internal-audit reviews for listed and pre-IPO companies."],
+   ["180","#0f766e","180 Degrees Consulting, Project Manager","Led 5 student consultants advising an NGO on revamping its flagship fundraiser."]
+ ]},
+ {t:"Singapore",p:"2021–2024 · career built",items:[
+   ["Mo","#2e5bff","Monee (formerly SeaMoney), Product Management, Special Projects (2021–22)","Product-managed the digital bank's KYC at ~1M applications/day; brought the direct-lending launch and partner loan-channelling integrations live front-to-back across seven functions."],
+   ["Mo","#2e5bff","Monee, Regional PMO, Digital Lending (2022–23)","Stood up loan-channelling with partner banks and financial institutions; identified SME lending as the underserved gap shaping regional expansion."],
+   ["Viu","#e8a11c","Viu / PCCW, Snr Strategy & Insights, CEO office (2023–24)","Built the content-return index, the business cases behind multi-million-dollar deals, and the monthly commercial story for senior management and the Board."]
+ ]},
+ {t:"Melbourne",p:"2024–present · upskill",items:[
+   ["MU","#006dae","Monash University, Master of Data Science","GPA 3.8. Final-year team lead and data scientist on rutAble, an accessibility-planning tool integrating 7 City of Melbourne datasets (~1.5M records)."],
+   ["An","#e8613c","Andisor, Strategy Analyst (2024–25)","Commercial intelligence and sales optimisation for a B2B SaaS marketplace; cut sales-cycle time by roughly 20%."],
+   ["Fx","#141517","Flexiq, Program Analyst (2026–present)","KPI framework and reporting automation across Australian energy-sector engagements, saving ~A$40K a year."]
+ ]}
+];
+function openCity(i){const c=citiesData[i];const rows=c.items.map(it=>`<div class="mitem"><span class="mlogo" style="background:${it[1]}">${it[0]}</span><div><div class="mblabel2">${it[2]}</div><div class="mbtext">${it[3]}</div></div></div>`).join('');document.getElementById('modal').innerHTML=`<button class="close" onclick="closeModal()">×</button><span class="mmetric">${c.p}</span><h3>${c.t}</h3><div style="margin-top:20px">${rows}</div>`;document.getElementById('overlay').classList.add('on');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('overlay').classList.remove('on');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. Four years turning ambiguous problems into decisions across APAC fintech, OTT media and SaaS: CEO-office business cases behind multi-million-dollar deals, a digital-bank product screening ~1M applications a day, a bank-to-bank lending channel stood up from zero, now paired with a Monash Master of Data Science (GPA 3.8). She sizes the opportunity, builds the model, and ships the thing, most candidates do one of the three. Available now; AU full work rights + SG PR. mschonghuiying@gmail.com · linkedin.com/in/jamie-chong";navigator.clipboard.writeText(t).then(()=>{const x=document.getElementById('copytxt');x.textContent='Copied ✓';setTimeout(()=>x.textContent='Copy candidate summary',1800);});}
+</script>
+</body>
+</html>
