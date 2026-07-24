@@ -214,7 +214,9 @@
   .mbtext{font-size:15px; color:var(--ink2); line-height:1.62}
   .mwhy{border-left:3px solid var(--warm); padding:10px 16px; font-size:14px; color:var(--slate); background:var(--warm-soft); border-radius:0 8px 8px 0; margin-top:20px}
   .mitem{display:flex; gap:14px; align-items:flex-start; margin-bottom:18px}
-  .mlogo{width:40px; height:40px; border-radius:9px; color:#fff; font-family:var(--mono); font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0}
+  .mlogo{width:40px; height:40px; border-radius:9px; color:#fff; font-family:var(--mono); font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden}
+  .mlogo.logo{background:#fff !important; border:1px solid var(--line); padding:5px}
+  .mlogo.logo img{width:100%; height:100%; object-fit:contain; display:block}
   .mblabel2{font-size:14px; font-weight:600; color:var(--ink); margin-bottom:3px; line-height:1.3}
   .demo{position:fixed; bottom:14px; right:14px; background:var(--ink); color:#fff; font-family:var(--mono); font-size:11px; padding:6px 12px; border-radius:7px; letter-spacing:.5px; z-index:60}
   @media(max-width:600px){
@@ -529,26 +531,26 @@ function openModal(i){const c=cases[i];document.getElementById('modal').innerHTM
 const citiesData=[
  {t:"Ipoh, Malaysia",p:"Where it began · hometown",items:[
    ["IP","#e8613c","Roots","Grew up in Ipoh, Perak, the starting point of a four-market journey across Asia-Pacific."],
-   ["MA","#cc3311","Mastercard Advisors, Summer Consultant (KL, 2019)","Benchmarked Malaysia's commercial credit-card market for a bank targeting 50k SME cards; built an Excel VBA sales toolkit for outbound callers.","<svg viewBox='0 0 24 24' width='23' height='23' fill='#ffffff' xmlns='http://www.w3.org/2000/svg'><path d='M11.343 18.031c.058.049.12.098.181.146-1.177.783-2.59 1.238-4.107 1.238C3.32 19.416 0 16.096 0 12c0-4.095 3.32-7.416 7.416-7.416 1.518 0 2.931.456 4.105 1.238-.06.051-.12.098-.165.15C9.6 7.489 8.595 9.688 8.595 12c0 2.311 1.001 4.51 2.748 6.031zm5.241-13.447c-1.52 0-2.931.456-4.105 1.238.06.051.12.098.165.15C14.4 7.489 15.405 9.688 15.405 12c0 2.31-1.001 4.507-2.748 6.031-.058.049-.12.098-.181.146 1.177.783 2.588 1.238 4.107 1.238C20.68 19.416 24 16.096 24 12c0-4.094-3.32-7.416-7.416-7.416zM12 6.174c-.096.075-.189.15-.28.231C10.156 7.764 9.169 9.765 9.169 12c0 2.236.987 4.236 2.551 5.595.09.08.185.158.28.232.096-.074.189-.152.28-.232 1.563-1.359 2.551-3.359 2.551-5.595 0-2.235-.987-4.236-2.551-5.595-.09-.08-.184-.156-.28-.231z'/></svg>"]
+   ["MA","#cc3311","Mastercard Advisors, Summer Consultant (KL, 2019)","Benchmarked Malaysia's commercial credit-card market for a bank targeting 50k SME cards; built an Excel VBA sales toolkit for outbound callers.","logos/mastercard.png"]
  ]},
  {t:"Hong Kong",p:"2017–2021 · study + first roles",items:[
-   ["HK","#003a70","HKUST, BSc Risk Management & Business Intelligence","First Class Honours. Semester exchange at Lancaster University (2020). Malaysia Chamber of Commerce (HK & Macau) Student Trust Fund, HK$160,000."],
-   ["UBS","#d5252a","UBS, Summer Analyst, IB APAC COO (2020)","Championed a COVID-era cloud migration, moving 50% of trade-floor bankers to cloud in two weeks; built an ML employee-clustering model for the firm-wide agile-working roadmap."],
-   ["AV","#6b7280","Avista Group, Internal Control intern (2018–19)","Risk and internal-audit reviews for listed and pre-IPO companies."],
-   ["180","#0f766e","180 Degrees Consulting, Project Manager","Led 5 student consultants advising an NGO on revamping its flagship fundraiser."]
+   ["HK","#003a70","HKUST, BSc Risk Management & Business Intelligence","First Class Honours. Semester exchange at Lancaster University (2020). Malaysia Chamber of Commerce (HK & Macau) Student Trust Fund, HK$160,000.","logos/hkust.png"],
+   ["UBS","#d5252a","UBS, Summer Analyst, IB APAC COO (2020)","Championed a COVID-era cloud migration, moving 50% of trade-floor bankers to cloud in two weeks; built an ML employee-clustering model for the firm-wide agile-working roadmap.","logos/ubs.png"],
+   ["AV","#6b7280","Avista Group, Internal Control intern (2018–19)","Risk and internal-audit reviews for listed and pre-IPO companies.","logos/avista.png"],
+   ["180","#0f766e","180 Degrees Consulting, Project Manager","Led 5 student consultants advising an NGO on revamping its flagship fundraiser.","logos/180dc.png"]
  ]},
  {t:"Singapore",p:"2021–2024 · career built",items:[
-   ["Mo","#2e5bff","Monee (formerly SeaMoney), Product Management, Special Projects (2021–22)","Product-managed the digital bank's KYC at ~1M applications/day; brought the direct-lending launch and partner loan-channelling integrations live front-to-back across seven functions."],
-   ["Mo","#2e5bff","Monee, Regional PMO, Digital Lending (2022–23)","Stood up loan-channelling with partner banks and financial institutions; identified SME lending as the underserved gap shaping regional expansion."],
-   ["Viu","#e8a11c","Viu / PCCW, Snr Strategy & Insights, CEO office (2023–24)","Built the content-return index, the business cases behind multi-million-dollar deals, and the monthly commercial story for senior management and the Board."]
+   ["Mo","#2e5bff","Monee (formerly SeaMoney), Product Management, Special Projects (2021–22)","Product-managed the digital bank's KYC at ~1M applications/day; brought the direct-lending launch and partner loan-channelling integrations live front-to-back across seven functions.","logos/monee.png"],
+   ["Mo","#2e5bff","Monee, Regional PMO, Digital Lending (2022–23)","Stood up loan-channelling with partner banks and financial institutions; identified SME lending as the underserved gap shaping regional expansion.","logos/monee.png"],
+   ["Viu","#e8a11c","Viu / PCCW, Snr Strategy & Insights, CEO office (2023–24)","Built the content-return index, the business cases behind multi-million-dollar deals, and the monthly commercial story for senior management and the Board.","logos/viu.png"]
  ]},
  {t:"Melbourne",p:"2024–present · upskill",items:[
-   ["MU","#006dae","Monash University, Master of Data Science","GPA 3.8. Final-year team lead and data scientist on rutAble, an accessibility-planning tool integrating 7 City of Melbourne datasets (~1.5M records)."],
-   ["An","#e8613c","Andisor, Strategy Analyst (2024–25)","Commercial intelligence and sales optimisation for a B2B SaaS marketplace; cut sales-cycle time by roughly 20%."],
-   ["Fx","#141517","Flexiq, Program Analyst (2026–present)","KPI framework and reporting automation across Australian energy-sector engagements, saving ~A$40K a year."]
+   ["MU","#006dae","Monash University, Master of Data Science","GPA 3.8. Final-year team lead and data scientist on rutAble, an accessibility-planning tool integrating 7 City of Melbourne datasets (~1.5M records).","logos/monash.png"],
+   ["An","#e8613c","Andisor, Strategy Analyst (2024–25)","Commercial intelligence and sales optimisation for a B2B SaaS marketplace; cut sales-cycle time by roughly 20%.","logos/andisor.png"],
+   ["Fx","#141517","Flexiq, Program Analyst (2026–present)","KPI framework and reporting automation across Australian energy-sector engagements, saving ~A$40K a year.","logos/flexiq.webp"]
  ]}
 ];
-function openCity(i){const c=citiesData[i];const rows=c.items.map(it=>`<div class="mitem"><span class="mlogo" style="background:${it[1]}">${it[4]||it[0]}</span><div><div class="mblabel2">${it[2]}</div><div class="mbtext">${it[3]}</div></div></div>`).join('');document.getElementById('modal').innerHTML=`<button class="close" onclick="closeModal()">×</button><span class="mmetric">${c.p}</span><h3>${c.t}</h3><div style="margin-top:20px">${rows}</div>`;document.getElementById('overlay').classList.add('on');document.body.style.overflow='hidden';}
+function openCity(i){const c=citiesData[i];const rows=c.items.map(it=>{const badge=it[4]?`<span class="mlogo logo"><img src="${it[4]}" alt="" onerror="var p=this.parentNode;p.classList.remove('logo');p.style.background='${it[1]}';p.textContent='${it[0]}'"></span>`:`<span class="mlogo" style="background:${it[1]}">${it[0]}</span>`;return `<div class="mitem">${badge}<div><div class="mblabel2">${it[2]}</div><div class="mbtext">${it[3]}</div></div></div>`;}).join('');document.getElementById('modal').innerHTML=`<button class="close" onclick="closeModal()">×</button><span class="mmetric">${c.p}</span><h3>${c.t}</h3><div style="margin-top:20px">${rows}</div>`;document.getElementById('overlay').classList.add('on');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('overlay').classList.remove('on');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. Four years turning ambiguous problems into decisions across APAC fintech, OTT media and SaaS: CEO-office business cases behind multi-million-dollar deals, a digital-bank product screening ~1M applications a day, a bank-to-bank lending channel stood up from zero, now paired with a Monash Master of Data Science (GPA 3.8). She sizes the opportunity, builds the model, and ships the thing, most candidates do one of the three. Available now; AU full work rights + SG PR. mschonghuiying@gmail.com · linkedin.com/in/jamie-chong";navigator.clipboard.writeText(t).then(()=>{const x=document.getElementById('copytxt');x.textContent='Copied ✓';setTimeout(()=>x.textContent='Copy candidate summary',1800);});}
