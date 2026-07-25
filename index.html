@@ -191,6 +191,10 @@
   .bubble.q{background:var(--accent); color:#fff; margin-left:auto; border-bottom-right-radius:4px}
   .bubble.a{background:#2a2b30; color:#dcdde1; border-bottom-left-radius:4px}
   .chatmsgs{max-height:280px; overflow-y:auto; display:flex; flex-direction:column; padding-right:2px}
+  .twinsug{display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 2px}
+  .twinsug .sug{background:#232428; border:1px solid #33343a; color:#b9bbc2; font-family:inherit; font-size:11.5px;
+    padding:6px 11px; border-radius:999px; cursor:pointer; text-align:left; transition:border-color .15s, color .15s}
+  .twinsug .sug:hover{border-color:var(--warm); color:#fff}
   .chatin{display:flex; gap:8px; margin-top:6px}
   .chatin input{flex:1; background:#141517; border:1px solid #2c2d32; border-radius:9px; padding:11px 13px; color:#dcdde1; font-size:13px; font-family:inherit}
   .chatin input::placeholder{color:#6a6b71}
@@ -362,8 +366,12 @@
     </div>
     <div class="chatbox">
       <div class="chatmsgs" id="twinMsgs">
-        <div class="bubble q">How did Jamie cut KYC onboarding time by 30%?</div>
-        <div class="bubble a">Ask me — I answer from my real projects and case studies, in my own words.</div>
+        <div class="bubble a">Ask away — I answer from my real projects and case studies, and I'll say so when something's outside them.</div>
+      </div>
+      <div class="twinsug" id="twinSug">
+        <button type="button" class="sug">What's your biggest commercial impact?</button>
+        <button type="button" class="sug">How do you turn data into a decision?</button>
+        <button type="button" class="sug">Why hire you for a strategy role?</button>
       </div>
       <div class="chatin">
         <input id="twinInput" type="text" placeholder="Ask anything about Jamie's work…" autocomplete="off">
@@ -724,7 +732,8 @@ function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. F
 (function(){
   var input=document.getElementById('twinInput'),
       send=document.getElementById('twinSend'),
-      msgs=document.getElementById('twinMsgs');
+      msgs=document.getElementById('twinMsgs'),
+      sug=document.getElementById('twinSug');
   if(!input||!send||!msgs) return;
   var busy=false;
   function bubble(text, who){
@@ -735,10 +744,11 @@ function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. F
     msgs.scrollTop=msgs.scrollHeight;
     return d;
   }
-  function ask(){
-    var q=input.value.trim();
+  function ask(preset){
+    var q=(preset!==undefined?preset:input.value).trim();
     if(!q||busy) return;
     busy=true; send.disabled=true; input.value='';
+    if(sug) sug.style.display='none';
     bubble(q,'q');
     var reply=bubble('•••','a'); reply.classList.add('typing');
     fetch('/api/twin',{
@@ -758,8 +768,13 @@ function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. F
       busy=false; send.disabled=false; input.focus();
     });
   }
-  send.addEventListener('click', ask);
+  send.addEventListener('click', function(){ ask(); });
   input.addEventListener('keydown', function(e){ if(e.key==='Enter') ask(); });
+  if(sug){
+    [].forEach.call(sug.querySelectorAll('.sug'), function(b){
+      b.addEventListener('click', function(){ ask(b.textContent); });
+    });
+  }
 })();
 </script>
 </body>
