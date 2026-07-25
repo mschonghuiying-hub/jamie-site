@@ -184,10 +184,15 @@
   .bubble{border-radius:12px; padding:11px 14px; font-size:13.5px; line-height:1.5; margin-bottom:10px; max-width:88%}
   .bubble.q{background:var(--accent); color:#fff; margin-left:auto; border-bottom-right-radius:4px}
   .bubble.a{background:#2a2b30; color:#dcdde1; border-bottom-left-radius:4px}
+  .chatmsgs{max-height:280px; overflow-y:auto; display:flex; flex-direction:column; padding-right:2px}
   .chatin{display:flex; gap:8px; margin-top:6px}
   .chatin input{flex:1; background:#141517; border:1px solid #2c2d32; border-radius:9px; padding:11px 13px; color:#dcdde1; font-size:13px; font-family:inherit}
   .chatin input::placeholder{color:#6a6b71}
-  .chatin .send{background:var(--warm); border:none; border-radius:9px; padding:0 15px; color:#fff; font-size:16px; cursor:not-allowed; opacity:.85}
+  .chatin .send{background:var(--warm); border:none; border-radius:9px; padding:0 15px; color:#fff; font-size:16px; cursor:pointer; transition:opacity .15s, background .15s}
+  .chatin .send:hover{background:#d5542f}
+  .chatin .send:disabled{cursor:default; opacity:.5}
+  .bubble.typing{color:#8a8c93; letter-spacing:2px}
+  .twindisc{font-family:var(--mono); font-size:10px; color:#7f8598; margin-top:10px; letter-spacing:.3px}
   .twin .soon{position:absolute; top:14px; right:14px; font-family:var(--mono); font-size:9.5px; letter-spacing:1px; background:rgba(232,97,60,.16); color:var(--warm); padding:3px 9px; border-radius:5px}
 
   .contact{background:var(--warm); border-radius:18px; padding:52px 46px; margin:26px 0 34px; text-align:center; position:relative; overflow:hidden}
@@ -535,13 +540,15 @@
       <p style="color:#7f8598; font-size:13px">Building this is part of how I work: I ship LLM tools and help teams adopt AI. This twin is one of them.</p>
     </div>
     <div class="chatbox">
-      <span class="soon">Coming soon</span>
-      <div class="bubble q">How did Jamie cut KYC onboarding time by 30%?</div>
-      <div class="bubble a">Great question, let me walk you through the checkpoint she redesigned and the trade-off she had to protect…</div>
-      <div class="chatin">
-        <input type="text" placeholder="Ask anything about Jamie's work…" disabled>
-        <button class="send" title="Coming soon">→</button>
+      <div class="chatmsgs" id="twinMsgs">
+        <div class="bubble q">How did Jamie cut KYC onboarding time by 30%?</div>
+        <div class="bubble a">Ask me — I answer from my real projects and case studies, in my own words.</div>
       </div>
+      <div class="chatin">
+        <input id="twinInput" type="text" placeholder="Ask anything about Jamie's work…" autocomplete="off">
+        <button id="twinSend" class="send" aria-label="Send">→</button>
+      </div>
+      <div class="twindisc">AI-generated from Jamie's real experience; may be imperfect.</div>
     </div>
   </div>
 </section>
@@ -658,6 +665,48 @@ function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. F
     }, {rootMargin:'-45% 0px -50% 0px'});
     ids.forEach(function(id){ spy.observe(document.getElementById(id)); });
   }
+})();
+
+/* ---- AI twin chat ---- */
+(function(){
+  var input=document.getElementById('twinInput'),
+      send=document.getElementById('twinSend'),
+      msgs=document.getElementById('twinMsgs');
+  if(!input||!send||!msgs) return;
+  var busy=false;
+  function bubble(text, who){
+    var d=document.createElement('div');
+    d.className='bubble '+who;
+    d.textContent=text;
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+    return d;
+  }
+  function ask(){
+    var q=input.value.trim();
+    if(!q||busy) return;
+    busy=true; send.disabled=true; input.value='';
+    bubble(q,'q');
+    var reply=bubble('•••','a'); reply.classList.add('typing');
+    fetch('/api/twin',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({question:q})
+    }).then(function(r){
+      return r.json().then(function(data){ return {ok:r.ok, data:data}; });
+    }).then(function(res){
+      reply.classList.remove('typing');
+      reply.textContent = res.ok ? (res.data.answer || '…') : (res.data.error || 'Something went wrong.');
+    }).catch(function(){
+      reply.classList.remove('typing');
+      reply.textContent='The twin is unavailable right now — please try again shortly.';
+    }).then(function(){
+      msgs.scrollTop=msgs.scrollHeight;
+      busy=false; send.disabled=false; input.focus();
+    });
+  }
+  send.addEventListener('click', ask);
+  input.addEventListener('keydown', function(e){ if(e.key==='Enter') ask(); });
 })();
 </script>
 </body>
