@@ -236,6 +236,61 @@
     .fcards{grid-template-columns:1fr}
     .sectitle{font-size:26px}
   }
+
+  /* ---------------- motion & aesthetic upgrade ---------------- */
+  @keyframes fadeUp{from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:none}}
+  @keyframes drawLine{to{transform:scaleX(1)}}
+  @keyframes floatA{0%,100%{transform:translate(0,0)} 50%{transform:translate(-26px,18px)}}
+  @keyframes floatB{0%,100%{transform:translate(0,0)} 50%{transform:translate(22px,-16px)}}
+  @keyframes glowPulse{0%,100%{opacity:.85; transform:scale(1)} 50%{opacity:1; transform:scale(1.12)}}
+
+  /* accent underline under "decisions." */
+  .hero h1 .hl{position:relative}
+  .hero h1 .hl::after{content:""; position:absolute; left:0; right:0; bottom:.04em; height:3px; border-radius:3px;
+    background:linear-gradient(90deg,var(--accent),var(--warm)); transform:scaleX(0); transform-origin:left}
+
+  /* floating brand blobs behind hero */
+  .hero{position:relative; overflow:hidden}
+  .hero .blob{position:absolute; border-radius:50%; filter:blur(48px); z-index:0; pointer-events:none}
+  .hero > *{position:relative; z-index:1}
+  .hero .blob.b1{width:340px; height:340px; top:0; right:-10px; background:radial-gradient(circle,rgba(46,91,255,.20),transparent 68%)}
+  .hero .blob.b2{width:280px; height:280px; top:180px; right:230px; background:radial-gradient(circle,rgba(232,97,60,.18),transparent 68%)}
+
+  /* nav underline + active state */
+  .navlinks a{position:relative}
+  .navlinks a::after{content:""; position:absolute; left:0; bottom:-5px; height:2px; width:100%;
+    background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .22s ease}
+  .navlinks a:hover::after,.navlinks a.active::after{transform:scaleX(1)}
+  .navlinks a.active{color:var(--ink)}
+
+  /* journey plane + city skylines */
+  .voyage svg{overflow:visible}
+  .voyage .plane{filter:drop-shadow(0 3px 3px rgba(20,21,23,.20))}
+
+  /* button + brand micro-lift */
+  .btn:hover{transform:translateY(-2px)}
+  .navcta{transition:background .15s, transform .15s}
+  .navcta:hover{transform:translateY(-2px)}
+  .brand{transition:color .18s}
+  .brand:hover{color:var(--accent)}
+
+  @media (prefers-reduced-motion: no-preference){
+    .hero .micro,.hero h1,.hero .lede,.hero .herocta,.hero .facts{opacity:0; animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+    .hero h1{animation-delay:.07s}
+    .hero .lede{animation-delay:.16s}
+    .hero .herocta{animation-delay:.26s}
+    .hero .facts{animation-delay:.36s}
+    .hero h1 .hl::after{animation:drawLine .9s .72s cubic-bezier(.2,.7,.2,1) forwards}
+    .hero .blob.b1{animation:floatA 15s ease-in-out infinite}
+    .hero .blob.b2{animation:floatB 19s ease-in-out infinite}
+    .twin::before{animation:glowPulse 7s ease-in-out infinite}
+    body.js-anim .reveal{opacity:0; transform:translateY(20px);
+      transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
+    body.js-anim .reveal.in{opacity:1; transform:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero h1 .hl::after{transform:scaleX(1)}
+  }
 </style>
 </head>
 <body>
@@ -256,6 +311,8 @@
 </nav>
 
 <header class="hero wrap">
+  <span class="blob b1" aria-hidden="true"></span>
+  <span class="blob b2" aria-hidden="true"></span>
   <div class="micro">Strategy × Data · commercial operator · Melbourne ⇄ Singapore</div>
   <h1>I turn complex data into <span class="hl">decisions.</span></h1>
   <p class="lede">Decisions that move money, strategy, and teams. Across ~4 years in APAC fintech, OTT media and SaaS, I've built the <b>business cases behind multi-million-dollar deals</b>, <b>launched regional lending products from zero</b>, and <b>shipped product in regulated environments</b>, working alongside founders, CEOs and senior leaders. Now in Melbourne, adding a Master of Data Science to that operator's foundation.</p>
@@ -303,14 +360,25 @@
     <svg viewBox="0 0 1080 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arw" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#e8613c" stroke-width="1.5"/></marker></defs>
       <path id="route" d="M135,105 Q285,30 415,80 T690,70 Q830,110 945,45" fill="none" stroke="#e8613c" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arw)" opacity="0.75"/>
-      <circle r="4" fill="#2e5bff"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
-      <circle r="4" fill="#e8613c"><animateMotion dur="7s" begin="2.4s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
-      <circle r="3" fill="#2e5bff" opacity="0.5"><animateMotion dur="7s" begin="4.8s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
+      <!-- city skylines above each node -->
+      <g class="skyline" transform="translate(135,88)" fill="#a7a9b0"><path d="M-11,0 L-4,-8 L-1,-4 L4,-11 L11,0 Z"/></g>
+      <g class="skyline" transform="translate(415,63)" fill="#a7a9b0"><rect x="-11" y="-6" width="3" height="6"/><rect x="-6.5" y="-10" width="3" height="10"/><rect x="-2" y="-14" width="3.5" height="14"/><rect x="3" y="-8" width="3" height="8"/><rect x="7.5" y="-11" width="3" height="11"/></g>
+      <g class="skyline" transform="translate(680,53)" fill="#a7a9b0"><rect x="-9" y="-11" width="3" height="11"/><rect x="-1.5" y="-11" width="3" height="11"/><rect x="6" y="-11" width="3" height="11"/><path d="M-12,-11 Q0,-17 12,-11 L12,-13.5 Q0,-19 -12,-13.5 Z"/></g>
+      <g class="skyline" transform="translate(945,28)" fill="#e8613c"><rect x="-10" y="-7" width="3" height="7"/><rect x="-5.5" y="-10" width="3" height="10"/><rect x="-1" y="-12" width="3" height="12"/><rect x="3.5" y="-8" width="3" height="8"/><rect x="8" y="-13" width="1.5" height="13"/><path d="M8.75,-13 L8,-19.5 L9.5,-13 Z"/></g>
+      <!-- faint trailing dot -->
+      <circle r="3" fill="#2e5bff" opacity="0.4"><animateMotion dur="9s" begin="1.1s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
       <circle cx="135" cy="105" r="7" fill="#fff" stroke="#2e5bff" stroke-width="2.5"/>
       <circle cx="415" cy="80" r="7" fill="#fff" stroke="#2e5bff" stroke-width="2.5"/>
       <circle cx="680" cy="70" r="7" fill="#fff" stroke="#2e5bff" stroke-width="2.5"/>
       <circle cx="945" cy="45" r="9" fill="none" stroke="#e8613c" stroke-width="2"><animate attributeName="r" values="9;17;9" dur="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="2.6s" repeatCount="indefinite"/></circle>
       <circle cx="945" cy="45" r="9" fill="#e8613c" stroke="#e8613c" stroke-width="2.5"/><circle cx="945" cy="45" r="3" fill="#fff"/>
+      <!-- flying plane, banks along the route -->
+      <g class="plane">
+        <path d="M10,0 L-9,-6.5 L-3.5,0 L-9,6.5 Z" fill="#e8613c"/>
+        <path d="M-3.5,0 L-9,6.5 L-1,1.4 Z" fill="#c24e2b"/>
+        <animateMotion dur="9s" repeatCount="indefinite" rotate="auto"><mpath href="#route"/></animateMotion>
+        <animate attributeName="opacity" dur="9s" repeatCount="indefinite" values="0;1;1;1;0" keyTimes="0;0.07;0.5;0.9;1"/>
+      </g>
       <text x="135" y="132" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5f6169">Ipoh, Malaysia</text>
       <text x="415" y="107" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5f6169">Hong Kong</text>
       <text x="680" y="97" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5f6169">Singapore</text>
@@ -554,6 +622,43 @@ function openCity(i){const c=citiesData[i];const rows=c.items.map(it=>{const bad
 function closeModal(){document.getElementById('overlay').classList.remove('on');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. Four years turning ambiguous problems into decisions across APAC fintech, OTT media and SaaS: CEO-office business cases behind multi-million-dollar deals, a digital-bank product screening ~1M applications a day, a bank-to-bank lending channel stood up from zero, now paired with a Monash Master of Data Science (GPA 3.8). She sizes the opportunity, builds the model, and ships the thing, most candidates do one of the three. Available now; AU full work rights + SG PR. mschonghuiying@gmail.com · linkedin.com/in/jamie-chong";navigator.clipboard.writeText(t).then(()=>{const x=document.getElementById('copytxt');x.textContent='Copied ✓';setTimeout(()=>x.textContent='Copy candidate summary',1800);});}
+
+/* ---- scroll reveal + nav scroll-spy ---- */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    document.body.classList.add('js-anim');
+    var sel = '.shead,.sectitle,.secsub,.about,.voyage,.city,.theme,.fcard,.pglabel,.repo,.skgroup,.edrow,.twin,.contact';
+    var els = [].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var idx = e.target.parentNode ? [].indexOf.call(e.target.parentNode.children, e.target) : 0;
+        e.target.style.transitionDelay = Math.min(idx,6)*55 + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -7% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+    // failsafe: never leave content hidden if the observer misfires
+    setTimeout(function(){ els.forEach(function(el){ el.classList.add('in'); }); }, 2600);
+  }
+  // nav scroll-spy
+  var links = {};
+  [].forEach.call(document.querySelectorAll('.navlinks a'), function(a){
+    var id = a.getAttribute('href').slice(1); if(document.getElementById(id)) links[id]=a;
+  });
+  var ids = Object.keys(links);
+  if(ids.length){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting) ids.forEach(function(id){ links[id].classList.toggle('active', id===e.target.id); });
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    ids.forEach(function(id){ spy.observe(document.getElementById(id)); });
+  }
+})();
 </script>
 </body>
 </html>
