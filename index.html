@@ -50,7 +50,35 @@
   .navlinks a:hover{color:var(--ink)}
   .navcta{font-size:13px; font-weight:500; padding:9px 17px; background:var(--ink); color:#fff; border-radius:8px; text-decoration:none}
   .navcta:hover{background:var(--warm)}
-  @media(max-width:820px){.navlinks{display:none}}
+  /* hamburger: hidden on desktop, drives the drawer below 820px */
+  .navtoggle{display:none; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    width:40px; height:40px; padding:0; background:var(--card); border:1px solid var(--line2);
+    border-radius:9px; cursor:pointer; flex-shrink:0}
+  .navtoggle span{display:block; width:17px; height:2px; background:var(--ink); border-radius:2px;
+    transition:transform .22s ease, opacity .18s ease}
+  .navtoggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .navtoggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .navtoggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  @media(max-width:820px){
+    .navtoggle{display:flex}
+    .navin{gap:12px}
+    .navlinks{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0;
+      background:var(--bg);
+      border-bottom:1px solid var(--line); box-shadow:0 14px 30px -22px rgba(20,21,23,.45);
+      padding:4px 22px 12px; max-height:calc(100vh - 60px); overflow-y:auto}
+    .navlinks.open{display:flex}
+    .navlinks a{padding:13px 2px; font-size:15px; color:var(--ink2); border-bottom:1px solid var(--line)}
+    .navlinks a:last-child{border-bottom:none}
+    .navlinks a::after{display:none}
+    .navlinks a.active{color:var(--accent); font-weight:500}
+  }
+  /* keep the CTA on phones, just tighten it; drop it only on very narrow screens */
+  @media(max-width:820px){
+    .navcta{padding:9px 14px; font-size:12.5px}
+  }
+  @media(max-width:340px){
+    .navcta{display:none}
+  }
 
   .hero{padding:70px 32px 44px}
   .hero .micro{color:var(--warm); margin-bottom:22px}
@@ -324,7 +352,7 @@
 <nav>
   <div class="navin">
     <div class="brand">Jamie Chong</div>
-    <div class="navlinks">
+    <div class="navlinks" id="navlinks">
       <a href="#twin">AI twin</a>
       <a href="#about">About</a>
       <a href="#journey">Journey</a>
@@ -334,6 +362,9 @@
       <a href="#contact">Contact</a>
     </div>
     <a class="navcta" href="#contact">Get in touch</a>
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -491,7 +522,7 @@
     <p class="tthesis">Building the models and the logic that decide where money goes, then getting the organisation to standardise on them.</p>
     <div class="fcards">
       <button class="fcard" onclick="openModal(0)">
-        <div class="ftop"><span class="fhl">“Which titles earn their keep,” made a firm-wide standard</span><span class="fmetric">Firm-wide</span></div>
+        <div class="ftop"><span class="fhl">“Which titles earn their keep,” made a firm-wide standard</span><span class="fmetric">Adopted firm-wide</span></div>
         <div class="fmeta">Viu / PCCW · CEO office · 2023–24</div>
         <div class="fread">READ MEMO →</div>
       </button>
@@ -509,12 +540,12 @@
     <p class="tthesis">Spotting the underserved gap, then actually launching the product that fills it, analysis and shipping in one person.</p>
     <div class="fcards">
       <button class="fcard" onclick="openModal(1)">
-        <div class="ftop"><span class="fhl">Standing up a bank-to-bank loan-channelling business, 0 to 1</span><span class="fmetric">0 → 1 launch</span></div>
+        <div class="ftop"><span class="fhl">Standing up a bank-to-bank loan-channelling business, 0 to 1</span><span class="fmetric">0→1: new lending line</span></div>
         <div class="fmeta">Monee · 2021–23</div>
         <div class="fread">READ MEMO →</div>
       </button>
       <button class="fcard" onclick="openModal(2)">
-        <div class="ftop"><span class="fhl">Founder's commercial co-pilot in B2B SaaS</span><span class="fmetric">−20% cycle</span></div>
+        <div class="ftop"><span class="fhl">Founder's commercial co-pilot in B2B SaaS</span><span class="fmetric">−20% sales cycle</span></div>
         <div class="fmeta">Andisor · Strategy Analyst · 2024–25</div>
         <div class="fread">READ MEMO →</div>
       </button>
@@ -530,12 +561,12 @@
     <p class="tthesis">Shipping product in regulated, high-stakes environments, then building the systems that make delivery visible and fast.</p>
     <div class="fcards">
       <button class="fcard" onclick="openModal(3)">
-        <div class="ftop"><span class="fhl">Screening a million loan applications a day</span><span class="fmetric">−30% onboarding</span></div>
+        <div class="ftop"><span class="fhl">Screening a million loan applications a day</span><span class="fmetric">−30% onboarding time</span></div>
         <div class="fmeta">Monee · Product Mgmt · 2021–22</div>
         <div class="fread">READ MEMO →</div>
       </button>
       <button class="fcard" onclick="openModal(4)">
-        <div class="ftop"><span class="fhl">From anecdote to evidence in energy delivery</span><span class="fmetric">~A$40K/yr</span></div>
+        <div class="ftop"><span class="fhl">From anecdote to evidence in energy delivery</span><span class="fmetric">~A$40K/yr saved</span></div>
         <div class="fmeta">Flexiq · Program Analyst · 2026–now</div>
         <div class="fread">READ MEMO →</div>
       </button>
@@ -638,7 +669,7 @@ const cases = [
    w:"I kept the underlying return logic but rebuilt how it ran. First I aligned the methodology with each market's leads so it fit how they actually worked, then partnered with the data team to automate the ingestion from those multiple sources into a Snowflake pipeline dashboard, same decisions, far less manual effort, and a number people trusted because they'd helped shape it. The framing mattered: an enhancement on top of existing workflow, not a disruption to it. Knowing people are naturally hesitant about a new tool, I rolled it out gradually, a proper intro session, a hands-on workshop, and follow-ups with stakeholders rather than a mandate dropped from above.",
    o:"With the regional office sitting alongside the CEO, the work had leadership sponsorship and buy-in, and the index became the tool teams used for budget allocation and per-title breakeven reviews. The business-case template built on the same logic became the APAC standard, adoption held because it was both sponsored from the top and genuinely easier than what it replaced.",
    y:"Built the instrument, fit it to how each market actually worked, and drove adoption through change management and executive sponsorship. Not just analysis, getting an organisation to change how it decides."},
-  {hl:"Standing up a bank-to-bank loan-channelling business, 0 to 1", meta:"Monee · Product & Regional PMO · 2021–2023", metric:"0 → 1 launch",
+  {hl:"Standing up a bank-to-bank loan-channelling business, 0 to 1", meta:"Monee · Product & Regional PMO · 2021–2023", metric:"0→1: new lending line",
    s:"A digital bank operating at significant regional scale was concentrated in a single core product, its own cash loans. To diversify revenue and reach more borrowers, it set out to channel loans through other banks and financial institutions across Southeast Asia, a business line that didn't exist yet.",
    d:"Standing this up from nothing meant solving four problems at once: a commercial model both sides would sign, partnership terms aligned with external institutions, a technical integration linking two companies' systems, and credit-risk and compliance sign-off before anything went live, all under pressure to hit an aggressive timeline.",
    w:"I ran it as the PMO sitting in the middle of all four. The commercial model came out of research and negotiation, structuring terms that worked for both the bank and each partner. The technical integration was the harder part: linking two organisations' systems takes heavy pre-work, shared understanding and alignment sessions, so I made myself the connective tissue, getting the right people from each side into the right conversation, removing blockers, and keeping requirements and expectations explicit. When a partner ran short on engineering resource, I didn't let it stall: I offered resourcing support for testing and set us up to validate in a sandbox first, focused on the high-risk cases that mattered most to both compliance and commercial.",
@@ -650,7 +681,7 @@ const cases = [
    w:"Partnered directly with the founder on sales-optimisation initiatives, built executive dashboards tracking deal performance, engagement, and product usage, and used product-analytics tools (PostHog, SQL) to find behaviour patterns and fix onboarding flows across both suppliers and retailers.",
    o:"Cut sales-cycle time by roughly 20% and gave leadership a live view of deal and usage performance to steer sourcing and merchandising.",
    y:"SaaS, two-sided marketplace, founder-adjacent, the product-analytics-to-commercial-decision loop growth and product roles hire for."},
-  {hl:"Screening a million loan applications a day", meta:"Product Mgmt Associate · Monee · 2021–2022", metric:"−30% onboarding",
+  {hl:"Screening a million loan applications a day", meta:"Product Mgmt Associate · Monee · 2021–2022", metric:"−30% onboarding time",
    s:"A digital bank was scaling direct lending across Southeast Asia. Its KYC checkpoint sat in front of the entire loan funnel, roughly one million applications a day, and was slow enough to cost real loan volume, under hard regulatory requirements that couldn't bend.",
    d:"How do you make onboarding faster without dropping a compliance control that regulators, credit risk, and finance all hold a veto over? The safe-looking move was to change nothing; the naive one was to relax the checks. Neither was acceptable.",
    w:"Instead of trying to make the checks themselves faster, I went back to the actual application flow and traffic and found the bottleneck wasn't the checks, it was how load was split between the automated system lane and the manual human-review lane. Too many applications were being routed to slow manual screening that stronger system checks could clear. I rebalanced the split: hardened the automated checks so they could confidently clear low-risk applications, and reserved human screening for the cases that genuinely needed a person. Crucially, I designed the routing so that balance could be tuned over time rather than hard-coded, as confidence in the system grew, more volume could shift across without a rebuild. Because it touched a compliance control, I released it gradually, shifting volume toward the automated lane in controlled increments with human reviewers on standby and close monitoring at each step, rather than a big-bang switch.",
@@ -726,6 +757,31 @@ function copySummary(){const t="Jamie Chong, a rare strategy-and-build hybrid. F
     }, {rootMargin:'-45% 0px -50% 0px'});
     ids.forEach(function(id){ spy.observe(document.getElementById(id)); });
   }
+})();
+
+/* ---- mobile nav drawer ---- */
+(function(){
+  var btn=document.getElementById('navToggle'), links=document.getElementById('navlinks');
+  if(!btn||!links) return;
+  function setOpen(open){
+    links.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open?'true':'false');
+    btn.setAttribute('aria-label', open?'Close menu':'Open menu');
+  }
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    setOpen(!links.classList.contains('open'));
+  });
+  // close after choosing a destination
+  [].forEach.call(links.querySelectorAll('a'), function(a){
+    a.addEventListener('click', function(){ setOpen(false); });
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') setOpen(false); });
+  document.addEventListener('click', function(e){
+    if(links.classList.contains('open') && !links.contains(e.target) && e.target!==btn) setOpen(false);
+  });
+  // never leave the drawer open when we cross back to the desktop layout
+  window.addEventListener('resize', function(){ if(window.innerWidth>820) setOpen(false); });
 })();
 
 /* ---- AI twin chat ---- */
