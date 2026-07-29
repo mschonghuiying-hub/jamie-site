@@ -111,6 +111,7 @@
   .sec{padding:60px 32px 4px}
   .sectitle{font-family:var(--serif); font-size:clamp(24px,3.2vw,34px); font-weight:500; letter-spacing:-.6px; margin-top:10px}
   .secsub{color:var(--slate); font-size:15.5px; margin:10px 0 30px; max-width:62ch}
+  .secsub-hint{color:var(--accent)}
   .divider{border:none; border-top:1px solid var(--line); margin:0}
   .shead{display:flex; align-items:center; gap:12px; margin-bottom:14px}
   .snum{font-family:var(--mono); font-size:13px; font-weight:600; color:#fff; background:var(--warm); width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0}
@@ -162,7 +163,8 @@
   .cfirm{font-family:var(--mono); font-size:10px; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:3px 7px; color:var(--slate)}
   .nowtag{font-family:var(--mono); font-size:9px; background:var(--warm); color:#fff; padding:2px 6px; border-radius:4px; letter-spacing:.5px; margin-left:8px}
   .city{cursor:pointer}
-  .cview{font-family:var(--mono); font-size:10px; color:var(--accent); margin-top:12px; letter-spacing:.5px; opacity:0; transition:opacity .2s}
+  /* always show the cue — a card that only reveals it on hover reads as static */
+  .cview{font-family:var(--mono); font-size:10px; color:var(--accent); margin-top:12px; letter-spacing:.5px; opacity:.7; transition:opacity .2s}
   .city:hover .cview{opacity:1}
 
   /* work, distinct mode cards */
@@ -466,7 +468,7 @@
   <hr class="divider" style="margin:44px 0 40px">
   <div class="shead"><span class="snum">03</span><span class="slabel">Journey</span></div>
   <h2 class="sectitle">A four-market voyage</h2>
-  <p class="secsub">From hometown, to study, to career, to upskilling, Ipoh to Hong Kong to Singapore to Melbourne.</p>
+  <p class="secsub">From hometown, to study, to career, to upskilling, Ipoh to Hong Kong to Singapore to Melbourne. <span class="secsub-hint">Open any city to see the roles behind it.</span></p>
   <div class="voyage">
     <svg viewBox="0 0 1080 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arw" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#e8613c" stroke-width="1.5"/></marker></defs>
